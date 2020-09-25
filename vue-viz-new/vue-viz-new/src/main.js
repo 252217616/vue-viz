@@ -4,15 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import dataV from '@jiaminghi/data-view'
-// import * as G2 from "@antv/g2";
 import axios from 'axios'
 import echarts from 'echarts'
-
+import liquidfill from "echarts-liquidfill"
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import store from "./common/store/store"
 
 Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts
-// Vue.use(G2)
 Vue.use(dataV)
+Vue.use(ElementUI);
 Vue.config.product
 
 Vue.config.productionTip = false
@@ -21,6 +23,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

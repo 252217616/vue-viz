@@ -8,26 +8,44 @@
 </style>
 <template>
 <div  class="o-echarts">
-  <dv-water-level-pond :config="config" />
+  <div :id="id" style="width:100%; height:100%"></div>
 </div>
   
 </template>
 
 <script>
+
 export default {
   name: "WaterPond",
   props: {
-    title: String
+    config: Object
+  },
+  mounted() {
+    this.myChart = this.$echarts.init(document.getElementById(this.id));
+    if(this.config != undefined){
+      this.myChart.setOption(this.config);
+    }
+  },
+  watch: { 
+    config(a,b){
+      if(b.series == undefined){
+        this.myChart.setOption(a);
+      }else {
+        this.myChart.setOption(b);
+      }
+    }
+   },
+  methods:{
+    updateNum(){
+
+    }
   },
   data() {
-      return {
-        config:{
-         data: [55],
-         shape: 'rect'
-        }      
+    return{
+      id: 'WaterPond_' + new Date().getTime() + Math.floor(Math.random() * 1000),
+      myChart:{}
+      }
     }
-    
-      
-  }
+  
 };
 </script>

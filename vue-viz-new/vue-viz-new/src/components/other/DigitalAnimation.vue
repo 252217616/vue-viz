@@ -7,13 +7,13 @@
 <script>
 export default {
     name: "DigitalAnimation",
-    data () {
-        return {
-            config : {
-                number: [100],
-                content: '{nt}个'
-            }
-        }
+      props: {
+        config: Object
     },
+    methods:{
+        
+    }
+
+
 }
 </script>

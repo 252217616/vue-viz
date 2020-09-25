@@ -7,7 +7,7 @@
     }
 </style>
 <template>
-<div class="o-echarts">
+<div class="o-echarts" >
   <dv-capsule-chart :config="config"  />
 </div>
   
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "Capsule",
+  name: "Capsule2",
   props: {
     title: String
   },
@@ -24,28 +24,28 @@ export default {
         config:{
            data: [
                 {
-                name: '南阳',
+                name: '',
                 value: 167
                 },
                 {
-                name: '周口',
+                name: '',
                 value: 123
                 },
                 {
-                name: '漯河',
+                name: '',
                 value: 98
                 },
                 {
-                name: '郑州',
+                name: '',
                 value: 75
                 },
                 {
-                name: '西峡',
+                name: '',
                 value: 66
                 },
             ],
             colors:['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff'],
-            unit:'单位',
+            
             showValue:true
         }
         

@@ -7,22 +7,18 @@
     }
 </style>
 <template>
-<div  class="o-echarts" >
+<div class="o-echarts">
   <dv-charts :option="option" />
 </div>
   
 </template>
 
 <script>
-import { changeDefaultConfig } from '@jiaminghi/charts'
 export default {
-  name: "RingDiagram-Static",
+  name: "ColumnLine",
   props: {
     option: Object
-  },
-  mounted() {
-    changeDefaultConfig('color', ['#00D88B','#FEAB65','#0091F0','#01E3EB','#8256E7','#E25D68'])
   }
-
+  
 };
 </script>
