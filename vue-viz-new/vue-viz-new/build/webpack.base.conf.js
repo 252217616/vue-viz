@@ -72,13 +72,6 @@ module.exports = {
       }
     ]
   },
-  plugins:[
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        postcss: [require('postcss-px2rem')({'remUnit': 100,'baseDpr':2})]
-      },
-    })]
-,  
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

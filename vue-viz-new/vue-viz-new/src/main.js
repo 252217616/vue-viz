@@ -10,10 +10,8 @@ import liquidfill from "echarts-liquidfill"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from "./common/store/store"
-import { remInit } from './responsive';
 import router from './router'
 
-remInit(16 / 9);
 
 Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts
