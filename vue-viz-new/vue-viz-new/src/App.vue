@@ -1,7 +1,7 @@
 <template>
-  <dv-full-screen-container>
+  <!-- <dv-full-screen-container> -->
       <router-view/>
-  </dv-full-screen-container>
+  <!-- </dv-full-screen-container> -->
 </template>
 
 <script>
@@ -17,12 +17,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   /* color: #2c3e50; */
-  margin-top: 60px;
+  
+  position:absolute;
+  top:0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+
 }
 body{
   margin:0px;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 html{
   width: 100%;

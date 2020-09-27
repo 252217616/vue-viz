@@ -1,10 +1,12 @@
 <template>
-  <div class="header-wrap" :style="header" style="background-repeat:no-repeat;">
-    <div class="header-left" style="flot:left">
+  <div class="header-wrap" :style="header" style="background-repeat:no-repeat;
+                background-size:100% 100%;
+                -moz-background-size:100% 100%;">
+    <div class="header-left" >
       <!-- <dv-decoration-8 style="width:300px;height:50px;" /> -->
     </div>
-    <div class="header-title" style="margin-top:8px">
-      <span class="title"  style="margin-left:260px">{{title}}</span>
+    <div class="header-title">
+      <span class="title" >{{title}}</span>
       <!-- <dv-decoration-5 style="width:700px;height:40px;" /> -->
     </div>
     <div class="header-right">
@@ -25,7 +27,7 @@ export default {
       return {
             header: {
             backgroundImage: "url(" + require("../../assets/header.png") + ")",
-            height: "75px",
+            height: "100%",
             
             },
             date: new Date(),
@@ -45,11 +47,17 @@ export default {
 };
 </script>
 <style >
+.header-title{
+  margin-top:8px
+}
 .header-wrap {
   width: 100%;
+  height:100%;
   display: flex;
   justify-content: space-between;}
-
+.header-left{
+  float:left
+}
 .title {
  
   font-size: 38px;
@@ -58,6 +66,7 @@ export default {
   color: #BAECFF;
   line-height: 53px;
   letter-spacing: 9px;
+  margin-left:260px
 }
 .time{
   width: 220px;

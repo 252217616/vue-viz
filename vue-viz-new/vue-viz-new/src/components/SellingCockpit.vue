@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <div>
+    <div style="height:7%">
       <Header v-bind:title="total"  />
           <!-- <div style="width:100%">
             <dv-decoration-2 style="width:100%;height:10px;" />
@@ -9,18 +9,18 @@
     <div :style="bodyCss" style="background-repeat:no-repeat;
                 background-size:100% 100%;
                 -moz-background-size:100% 100%;">
-            <div style="float:left;margin-left:23px;width:521.26px;height:100%">
+            <div class="left">
               <!-- 左 -->
               <!-- <button v-on:click="onload()">123123</button> -->
-              <div style="margin-top:37px;width:100%;height:345px">
+              <div  class="left-top" >
                  <!-- 左-上 -->
-                <div style="box-sizing: border-box;padding-top:10px;margin-left:22px;width: 144px;height: 25px;font-size: 18px;font-family: AppleSystemUIFont;color: #BCEDFF;line-height: 21px;">电商品类销售占比</div>          
+                <div class="left-top-ring" >电商品类销售占比</div>          
                   <RingDiagram v-bind:option="RingDiagramOption"/>
               </div>
-              <div style="margin-top:21px;width:100%;height:555px">
+              <div class= "left-down" >
                 <!-- 左-下 -->
-                <div style="box-sizing: border-box;padding:21px 41px;height:100%;width:100%">
-                  <div style="position:absolute;width:100px;margin-left:300px;height:30px;">
+                <div class="left-down-div" >
+                  <div class="left-down-year" >
                     <el-select v-model="mallYear" placeholder="选择年份" size="small">
                       <el-option
                         v-for="item in yearSelects"
@@ -30,13 +30,8 @@
                       </el-option>
                     </el-select>
                   </div>
-                  <div style="height:45px;width:100%">
-                    <span style="
-                        font-size: 18px;
-                        font-family: PingFangSC-Medium, PingFang SC;
-                        font-weight: 500;
-                        color: #BCEDFF;
-                        line-height: 25px;">
+                  <div class="left-down-mall-tab" >
+                    <span class="left-down-mall-tab-text" >
                         电商品类销售
                       </span>
                   </div>
@@ -69,131 +64,105 @@
                 
               </div>
             </div>
-            <div style="float:left;margin-top:37px;margin-left:21px;width:773px;height:100%">
+            <div class="middle">
               <!-- 中 -->
-              <div style="width:100%;height:630px;">
+              <div class="middle-top" >
                 <!-- 中-上 -->
-                <div style="width: 438px;
-                      height: 220px;
-                      background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.02) 100%);
-                      border: 1px solid;
-                      border-image: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.04)) 1 1;
-                       position:absolute;margin-left:335px;">
-                       <div style="float:right;margin-top:20px;height:17px;margin-right:24px;">
-                         <div id="userNum" style="width:100px;height:50px;position:absolute; margin-top:10px;margin-left:80px;                         
-                          font-size: 40px;
-                          font-family: Impact;
-                          color: #51AEFF;
-                          line-height: 68px;">{{changeUserNum}}</div>
-                         <span style="color:white;font-size: 14px;font-family: Impact;float:right">累计用户数</span></div>
-                       <div style="float:right;margin-top:20px;height:70px;width:100%;margin-right:17px;letter-spacing:7px">
+                <div class="middle-top-div" >
+                       <div class="middle-top-user1">
+                         <div class="middle-top-div-usercNum" id="userNum" >{{changeUserNum}}</div>
+                         <span class="middle-top-div-userctext" >累计用户数</span></div>
+                       <div class="middle-top-div-userdNum" >
                          <div style="float:right;">
                           <DigitalAnimation v-bind:config="userNum" />
                          </div>
                        </div>
-                       <div style="float:right;margin-top:5px;height:17px;width:100%;margin-right:24px;">
-                          <div id="todayUserNum" style="width:100px;height:50px;position:absolute; margin-top:20px;margin-left:450px;                                                 
-                            font-size: 30px;
-                            font-family: Impact;
-                            color: #FF9235;
-                            line-height: 48px;">{{changeTodayUserNum}}</div>
-                         <span style="color:white;font-size: 14px;font-family: Impact;float:right">今日新增用户数</span></div>
-                       <div style="float:right;margin-top:10px;height:70px;width:100%;margin-right:24px;">
+                       <div class="middle-top-user2" >
+                          <div class="middle-top-user2-num" id="todayUserNum" >{{changeTodayUserNum}}</div>
+                         <span class="middle-top-user2-text" >今日新增用户数</span></div>
+                       <div class="middle-top-user2-dnum">
                          <div style="float:right;">
                           <DigitalAnimation v-bind:config="todayUserNum" />
                          </div>
                        </div>
                       </div>
-                <div style="margin-top:70px;margin-left:70px;width:525.4px;height:541px;position:absolute;">
+                <div class="middle-top-map" >
                   <EchartMap/>
                 </div>
               </div>
-               <div style="width:100%;height:270px;display:inline;">
+               <div class="middle-down">
                 <!-- 中-下 -->
-                <div style="margin-top:20px;float:left;height:271px;width:375px">
-                  <div style="box-sizing: border-box;padding:0 20px;height:100%;width:100%">
-                    <div style="margin-top:10px;height:20px">
-                      <span style="color:#BCEDFF;font-size: 13px;font-family:PingFangSC-Medium, PingFang SC;float:left">累计套餐交易</span>
+                <div class="middle-down-div" >
+                  <div class="middle-down-div-1" >
+                    <div class="middle-down-div-2" >
+                      <span >累计套餐交易</span>
                     </div>
-                    <div style="width:100%;height:90px;">
-                      <div style="margin-top:20px;margin-left:5px;float:left;width:150px;height:70px;background: #002A61;border: 1px solid #004878;">
-                          <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:left;margin-top:13px;margin-left:17px">交易数量</span>
-                          
-                          <div style="width:150px;height:30px;margin-top:30px"> 
-                            <span style="color:#FF9235;font-size: 18px;font-family: Impact;float:left;margin-top:13px;margin-left:17px">{{unicomNum}}</span>
-                            <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:right;margin-top:15px;margin-right:10px">单</span>
+                    <div class="middle-down-div-num" >
+                      <div class="middle-down-div-num1" >
+                          <span >交易数量</span>
+                          <div class="middle-down-div-num2" > 
+                            <span class="middle-down-div-num-text" >{{unicomNum}}</span>
+                            <span class="middle-down-div-num-unit" >单</span>
                           </div>
                         </div>
-                      <div style="margin-top:20px;margin-left:25px;float:left;width:150px;height:70px;background: #002A61;border: 1px solid #004878;">
-                        <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:left;margin-top:13px;margin-left:17px">交易金额</span>
-                          <div style="width:150px;height:30px;margin-top:30px"> 
-                            <span style="color:#FF9235;font-size: 18px;font-family: Impact;float:left;margin-top:13px;margin-left:17px">{{unicomAmount}}</span>
-                            <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:right;margin-top:15px;margin-right:10px">元</span>
+                      <div  class="middle-down-div-num1" >
+                        <span >交易金额</span>
+                          <div class="middle-down-div-num2"> 
+                            <span class="middle-down-div-num-text" >{{unicomAmount}}</span>
+                            <span class="middle-down-div-num-unit">元</span>
                           </div>
                       </div>
                     </div>
-                    <div style="margin-top:20px;height:20px">
-                      <span style="color:#BCEDFF;font-size: 13px;font-family:PingFangSC-Medium, PingFang SC;float:left">今日套餐交易</span>
+                    <div class="middle-down-div-2">
+                      <span >今日套餐交易</span>
                     </div>
                     <div >
-                       <div style="position:absolute;margin-top:70px;z-index: 10;margin-left:55px;
-                          font-size: 12px;
-                          font-family: AppleSystemUIFont;
-                          color: #BCEDFF;">交易数量</div>
-                      <div style="margin-top:5px;margin-left:5px;float:left;width:150px;height:100px">
+                       <div class="middle-down-div-3" >交易数量</div>
+                      <div  class="middle-down-div-3-water" >
                        <WaterPond v-bind:config="unicomNumWaterPond"/>
                       </div>
                       <div>
-                        <div style="position:absolute;margin-top:70px;z-index: 10;margin-left:235px;
-                          font-size: 12px;
-                          font-family: AppleSystemUIFont;
-                          color: #BCEDFF;">交易金额</div>
-                      <div style="margin-top:5px;margin-left:30px;float:left;width:150px;height:100px">
+                        <div class="middle-down-div-4" >交易金额</div>
+                      <div class="middle-down-div-4-water"  >
                        <WaterPond v-bind:config="unicomAmountWaterPond"/>
                       </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div style="margin-top:20px;margin-left:21px;float:left;height:271px;width:375px">
-                  <div style="box-sizing: border-box;padding:0 20px;height:100%;width:100%">
-                    <div style="margin-top:10px;height:20px">
-                      <span style="color:#BCEDFF;font-size: 13px;font-family:PingFangSC-Medium, PingFang SC;float:left">累计电商交易</span>
+                <div class="middle-down-div2" >
+                  <div  class="middle-down-div-1" >
+                    <div  class="middle-down-div-2" >
+                      <span >累计电商交易</span>
                     </div>
-                    <div style="width:100%;height:90px;">
-                      <div style="margin-top:20px;margin-left:5px;float:left;width:150px;height:70px;background: #002A61;border: 1px solid #004878;">
-                          <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:left;margin-top:13px;margin-left:17px">交易数量</span>
+                    <div class="middle-down-div-num">
+                      <div class="middle-down-div-num1">
+                          <span >交易数量</span>
                           
-                          <div style="width:150px;height:30px;margin-top:30px"> 
-                            <span style="color:#FF9235;font-size: 18px;font-family: Impact;float:left;margin-top:13px;margin-left:17px">{{mallNum}}</span>
-                            <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:right;margin-top:15px;margin-right:10px">单</span>
+                          <div class="middle-down-div-num2"> 
+                            <span class="middle-down-div-num-text" >{{mallNum}}</span>
+                            <span class="middle-down-div-num-unit">单</span>
                           </div>
                         </div>
-                      <div style="margin-top:20px;margin-left:25px;float:left;width:150px;height:70px;background: #002A61;border: 1px solid #004878;">
-                        <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:left;margin-top:13px;margin-left:17px">交易金额</span>
-                          <div style="width:150px;height:30px;margin-top:30px"> 
-                            <span style="color:#FF9235;font-size: 18px;font-family: Impact;float:left;margin-top:13px;margin-left:17px">{{mallAmount}}</span>
-                            <span style="color:#BCEDFF;font-size: 12px;font-family: AppleSystemUIFont;float:right;margin-top:15px;margin-right:10px">元</span>
+                      <div  class="middle-down-div-num1" >
+                        <span >交易金额</span>
+                          <div  class="middle-down-div-num2"> 
+                            <span class="middle-down-div-num-text">{{mallAmount}}</span>
+                            <span class="middle-down-div-num-unit">元</span>
                           </div>
                       </div>
                     </div>
-                    <div style="margin-top:20px;height:20px">
-                      <span style="color:#BCEDFF;font-size: 13px;font-family:PingFangSC-Medium, PingFang SC;float:left">今日电商交易</span>
+                    <div  class="middle-down-div-2">
+                      <span >今日电商交易</span>
                     </div>
                     <div >
-                       <div style="position:absolute;margin-top:70px;z-index: 10;margin-left:55px;
-                          font-size: 12px;
-                          font-family: AppleSystemUIFont;
-                          color: #BCEDFF;">交易数量</div>
-                      <div style="margin-top:5px;margin-left:5px;float:left;width:150px;height:100px">
+                       <div class="middle-down-div-3" >交易数量</div>
+                      <div  class="middle-down-div-3-water">
                        <WaterPond v-bind:config="mallNumWaterPond"/>
                       </div>
                       <div>
-                        <div style="position:absolute;margin-top:70px;z-index: 10;margin-left:235px;
-                          font-size: 12px;
-                          font-family: AppleSystemUIFont;
-                          color: #BCEDFF;">交易金额</div>
-                      <div style="margin-top:5px;margin-left:30px;float:left;width:150px;height:100px">
+                        <div  class="middle-down-div-4" >交易金额</div>
+                      <div class="middle-down-div-4-water" >
                        <WaterPond v-bind:config="mallAmountWaterPond"/>
                       </div>
                       </div>
@@ -203,49 +172,32 @@
               </div>
 
             </div>
-            <div style="float:left;margin-left:21px;width:537.12px;height:100%">
+            <div class="right" >
               <!-- 右 -->
-              <div style="margin-top:37px;width:100%;height:320px;box-sizing: border-box;padding:0 20px;">
+              <div class="right-top">
                 <!-- 右-上 -->
-                <div style="float:left;margin-top:10px;
-                  font-size: 13px;
-                  font-family: PingFangSC-Medium, PingFang SC;
-                  font-weight: 500;
-                  color: #BCEDFF;
-                  line-height: 18px;">今日套餐分布</div>
+                <div  class="right-top-h1">今日套餐分布</div>
                   <br/>
-                  <div style="height:20px;width:100%;margin-top:20px">
-                    <span style="margin-left:10%;
-                        font-size: 13px;
-                        font-family: PingFangSC-Medium, PingFang SC;
-                        font-weight: 500;
-                        color: #387FFF;
-                        line-height: 18px;">受理笔数</span>
-                    <span style="margin-left:55%;
-                        font-size: 13px;
-                        font-family: PingFangSC-Medium, PingFang SC;
-                        font-weight: 500;
-                        color: #FED6B1;
-                        line-height: 18px;">金额占比</span>
+                  <div class="right-top-leabl" >
+                    <span class="right-top-leabl-1" >受理笔数</span>
+                    <span class="right-top-leabl-2">金额占比</span>
                     </div>
-                  <div style="box-sizing: content-box;display:flex;width:100%;padding:0;float:left;">
-                    <div style="box-sizing: content-box;padding:5px;float:left;width:170px;height:250px">
+                  <div class="right-top-left" >
+                    <div class="right-top-left-1" >
                         <div style="width:100%;height:20%" v-for="x in unicomDistributed">
                          <div class="barNum" style="width:100%;height:50%;">{{x.num+" 单"}}</div>
                          <div style="width:100%;height:50%"><Percent v-bind:barStyle="x.numStyle"/></div>
                         </div>
                     </div>
-                    <div style="box-sizing: content-box;padding:5px;float:left;width:170px;height:250px;
-                        background: linear-gradient(180deg, rgba(79, 237, 249, 0) 0%, rgba(79, 237, 249, 0.2) 54%, rgba(39, 214, 240, 0) 100%);
-                        ">
-                        <div style="height:18px"></div>
+                    <div class="right-top-middle" >
+                        <div class= "h18"></div>
                           <div style="width:100%;height:20%; " v-for="x in unicomDistributed"> 
                             <div class="barExplain"> 
                               <span>{{x.remark}}</span> 
                             </div>
                           </div>
                         </div>
-                    <div style="box-sizing: content-box;padding:5px;float:left;width:170px;height:250px">
+                    <div class="right-top-right" >
                        <div style="width:100%;height:20%" v-for="x in unicomDistributed">
                          <div class="barNum" style="width:100%;height:50%">{{x.amount+" 元"}}</div>
                          <div style="width:100%;height:50%"><Percent v-bind:barStyle="x.amountStyle"/></div>
@@ -255,50 +207,36 @@
                 
                 
               </div>
-              <div style="margin-top:24px;width:100%;height:281px;box-sizing: border-box;padding:0 20px;">
+              <div class="right-middle">
                  <!-- 右-中 -->
-                <div style="float:left;margin-top:10px;
-                  font-size: 13px;
-                  font-family: PingFangSC-Medium, PingFang SC;
-                  font-weight: 500;
-                  color: #BCEDFF;
-                  line-height: 18px;">当月业务受理分布</div>
-                  <div style="position:absolute;width:420px;height:165px;margin-left:65px;margin-top:80px;
-                  background: linear-gradient(180deg, rgba(89, 153, 255, 0) 0%, rgba(93, 220, 229, 0.28) 100%);
-                  opacity: 0.58;"></div>
-                  <div style="position:absolute;z-index:10;margin-left:370px">
-                    <div style="margin-top: 10px">
+                <div class="right-middle-text" >当月业务受理分布</div>
+                  <div class="right-middle-text-1" ></div>
+                  <div class="right-middle-text-2"  >
+                    <div class="mt10" >
                       <el-radio-group v-model="dayColumnType" size="small" @change="changeDayColumnLineType">
                         <el-radio-button label="0">数量</el-radio-button>
                         <el-radio-button label="1">流水</el-radio-button>
                       </el-radio-group>
                     </div>
                   </div>
-                  <div style="width:550px;height:300px;padding:20px 0 0 0 ; box-sizing: border-box;">
+                  <div class="right-middle-cLine" >
                     <ColumnLine v-bind:option="dayColumnLineOption"/>
                   </div>
                
               </div>
-              <div style="margin-top:22.5px;width:100%;height:271px;box-sizing: border-box;padding:0 20px;">
+              <div class="right-down" >
                 <!-- 右-下 -->
-                <div style="float:left;margin-top:10px;
-                  font-size: 13px;
-                  font-family: PingFangSC-Medium, PingFang SC;
-                  font-weight: 500;
-                  color: #BCEDFF;
-                  line-height: 18px;">整体业务受理分布</div>
-                  <div style="position:absolute;width:420px;height:165px;margin-left:65px;margin-top:60px;
-                  background: linear-gradient(180deg, rgba(89, 153, 255, 0) 0%, rgba(93, 220, 229, 0.28) 100%);
-                  opacity: 0.58;"></div>
-                  <div style="position:absolute;z-index:10;margin-left:370px">
-                    <div style="margin-top: 10px">
+                <div class="right-down-text" >整体业务受理分布</div>
+                  <div class="ight-middle-text-1" ></div>
+                  <div class="right-middle-text-2">
+                    <div class="mt10">
                       <el-radio-group v-model="monthColumnType" size="small" @change="changeMonthColumnLineType">
                         <el-radio-button label="0">数量</el-radio-button>
                         <el-radio-button label="1">流水</el-radio-button>
                       </el-radio-group>
                     </div>
                   </div>
-                  <div style="width:550px;height:280px;padding:20px 0 0 0 ; box-sizing: border-box;">
+                  <div   class="right-down-cLine" >
                     <ColumnLine  v-bind:option="monthColumnLineOption"/>
                   </div>
               </div>
@@ -350,12 +288,12 @@ export default {
     let time = this.getTime();
     this.mallYear = time.year; 
     this.thisYear = time.year;
-    const timer = window.setInterval(() => {
-      setTimeout(this.onload(), 0)
-    }, 10000)
-    this.$once('hook:beforeDestroy', ()=>{
-    clearInterval(timer)
-  })
+    // const timer = window.setInterval(() => {
+    //   setTimeout(this.onload(), 0)
+    // }, 10000)
+    // this.$once('hook:beforeDestroy', ()=>{
+    // clearInterval(timer)
+  // })
 
   },
   data() {
@@ -363,7 +301,7 @@ export default {
       total:"来乐-销售数据驾驶舱",
       bodyCss:{
         backgroundImage: "url(" + require("../assets/body.png") + ")",
-        height: "1004px",
+        height: "100%",
          
       },
       oldTime:undefined,
@@ -1153,7 +1091,9 @@ export default {
     // background-color:#2c3e50;
   }
   #main{
-    position:relative
+    position:relative;
+    height:100%;
+    width: 100%;
   }
   .statNum{
     position:absolute;
@@ -1329,4 +1269,372 @@ export default {
   color: #FFFFFF;
 }
 
+.left{
+  float:left;
+  margin-left:23px;
+  width:521.26px;
+  height:100%
+}
+.left-top{
+  margin-top:37px;
+  width:100%;
+  height:345px
+}
+.left-top-ring{
+  box-sizing: border-box;
+  padding-top:10px;
+  margin-left:22px;
+  width: 144px;
+  height: 25px;
+  font-size: 18px;
+  font-family: AppleSystemUIFont;
+  color: #BCEDFF;
+  line-height: 21px;
+}
+
+.left-down{
+  margin-top:21px;
+  width:100%;
+  height:555px
+}
+.left-down-div{
+  box-sizing: border-box;
+  padding:21px 41px;
+  height:100%;
+  width:100%
+}
+.left-down-year{
+  position:absolute;
+  width:100px;
+  margin-left:300px;
+  height:30px;
+}
+.left-down-mall-tab{
+  height:45px;
+  width:100%
+}
+.left-down-mall-tab-text{
+  font-size: 18px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #BCEDFF;
+  line-height: 25px;
+}
+.middle{
+  float:left;
+  margin-top:37px;
+  margin-left:21px;
+  width:773px;
+  height:100%
+}
+.middle-top{
+  width:100%;
+  height:630px;
+}
+.middle-top-div{
+  width: 438px;
+  height: 220px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.02) 100%);
+  border: 1px solid;
+  border-image: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.04)) 1 1;
+  position:absolute;margin-left:335px;
+}
+.middle-top-user1{
+  float:right;
+  margin-top:20px;
+  height:17px;
+  margin-right:24px;  
+}
+.middle-top-div-usercNum{
+  width:100px;
+  height:50px;
+  position:absolute; 
+  margin-top:10px;
+  margin-left:80px;                         
+  font-size: 40px;
+  font-family: Impact;
+  color: #51AEFF;
+  line-height: 68px;
+}
+.middle-top-div-userctext{
+  color:white;
+  font-size: 14px;
+  font-family: Impact;
+  float:right
+}
+.middle-top-div-userdNum{
+  float:right;
+  margin-top:20px;
+  height:70px;
+  width:100%;
+  margin-right:17px;
+  letter-spacing:7px
+}
+.middle-top-user2{
+  float:right;
+  margin-top:5px;
+  height:17px;
+  width:100%;
+  margin-right:24px;
+}
+.middle-top-user2-num{
+  width:100px;
+  height:50px;
+  position:absolute;
+  margin-top:20px;
+  margin-left:450px;                                                 
+  font-size: 30px;
+  font-family: Impact;
+  color: #FF9235;
+  line-height: 48px;
+}
+.middle-top-user2-text{
+  color:white;
+  font-size: 14px;
+  font-family: Impact;
+  float:right
+}
+.middle-top-user2-dnum{
+  float:right;
+  margin-top:10px;
+  height:70px;
+  width:100%;
+  margin-right:24px;
+}
+.middle-top-map{
+  margin-top:70px;
+  margin-left:70px;
+  width:525.4px;
+  height:541px;
+  position:absolute;
+}
+.middle-down{
+  width:100%;
+  height:270px;
+  display:inline;
+}
+.middle-down-div{
+  margin-top:20px;
+  float:left;
+  height:271px;
+  width:375px
+}
+.middle-down-div-1{
+  box-sizing: border-box;
+  padding:0 20px;
+  height:100%;
+  width:100%
+}
+.middle-down-div-2{
+  margin-top:10px;
+  height:20px;
+    span{
+      color:#BCEDFF;
+      font-size: 13px;
+      font-family:PingFangSC-Medium, PingFang SC;
+      float:left
+    }
+}
+.middle-down-div-num{
+  width:100%;
+  height:90px;
+}
+.middle-down-div-num1{
+  margin-top:20px;
+  margin-left:5px;
+  float:left;
+  width:150px;
+  height:70px;
+  background: #002A61;
+  border: 1px solid #004878;
+    span{
+      color:#BCEDFF;
+      font-size: 12px;
+      font-family: AppleSystemUIFont;
+      float:left;
+      margin-top:13px;
+      margin-left:17px
+    }
+}
+.middle-down-div-num2{
+  width:150px;
+  height:30px;
+  margin-top:30px
+}
+.middle-down-div-num-text{
+  color:#FF9235;
+  font-size: 18px;
+  font-family: Impact;
+  float:left;
+  margin-top:13px;
+  margin-left:17px
+}
+.middle-down-div-num-unit{
+  color:#BCEDFF;
+  font-size: 12px;
+  font-family: AppleSystemUIFont;
+  float:right;
+  margin-top:15px;
+  margin-right:10px
+}
+.middle-down-div-3{
+  position:absolute;
+  margin-top:70px;
+  z-index: 10;
+  margin-left:55px;
+  font-size: 12px;
+  font-family: AppleSystemUIFont;
+  color: #BCEDFF;
+}
+.middle-down-div-3-water{
+  margin-top:5px;
+  margin-left:5px;
+  float:left;
+  width:150px;
+  height:100px
+}
+.middle-down-div-4{
+  position:absolute;
+  margin-top:70px;
+  z-index: 10;
+  margin-left:235px;
+  font-size: 12px;
+  font-family: AppleSystemUIFont;
+  color: #BCEDFF;
+}
+.middle-down-div-4-water{
+  margin-top:5px;
+  margin-left:30px;
+  float:left;
+  width:150px;
+  height:100px
+}
+.middle-down-div2{
+  margin-top:20px;
+  margin-left:21px;
+  float:left;
+  height:271px;
+  width:375px
+}
+.right{
+  float:left;
+  margin-left:21px;
+  width:537.12px;
+  height:100%
+}
+.right-top{
+  margin-top:37px;
+  width:100%;
+  height:320px;
+  box-sizing: border-box;
+  padding:0 20px;
+}
+.right-top-h1{
+  float:left;
+  margin-top:10px;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #BCEDFF;
+  line-height: 18px;
+} 
+.right-top-leabl{
+  height:20px;
+  width:100%;
+  margin-top:20px
+}
+.right-top-leabl-1{
+  margin-left:10%;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #387FFF;
+  line-height: 18px;
+}
+.right-top-leabl-2{
+  margin-left:55%;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FED6B1;
+  line-height: 18px;
+}
+.right-top-left{
+  box-sizing: content-box;
+  display:flex;
+  width:100%;
+  padding:0;
+  float:left;
+}
+.right-top-left-1{
+  box-sizing: content-box;
+  padding:5px;
+  float:left;
+  width:170px;
+  height:250px
+}
+.right-top-middle{
+  box-sizing: content-box;
+  padding:5px;
+  float:left;
+  width:170px;
+  height:250px;
+  background: linear-gradient(180deg, rgba(79, 237, 249, 0) 0%, rgba(79, 237, 249, 0.2) 54%, rgba(39, 214, 240, 0) 100%);
+                        
+}
+.h18{
+  height: 18px;
+}
+.right-top-right{
+  box-sizing: content-box;
+  padding:5px;
+  float:left;
+  width:170px;
+  height:250px
+}
+.right-middle{
+  margin-top:24px;width:100%;height:281px;box-sizing: border-box;padding:0 20px;
+}
+.right-middle-text{
+  float:left;
+  margin-top:10px;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #BCEDFF;
+  line-height: 18px;  
+}
+.right-middle-text-1{
+  position:absolute;
+  width:420px;
+  height:165px;
+  margin-left:65px;
+  margin-top:80px;
+  background: linear-gradient(180deg, rgba(89, 153, 255, 0) 0%, rgba(93, 220, 229, 0.28) 100%);
+  opacity: 0.58;
+}
+.right-middle-text-2{
+  position:absolute;z-index:10;margin-left:370px
+}
+.mt10{
+  margin-top: 10px
+}
+.right-middle-cLine{
+  width:550px;height:300px;padding:20px 0 0 0 ; box-sizing: border-box;
+}
+.right-down{
+  margin-top:22.5px;width:100%;height:271px;box-sizing: border-box;padding:0 20px;
+}
+.right-down-text{
+  float:left;
+  margin-top:10px;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #BCEDFF;
+  line-height: 18px;
+}
+.right-down-cLine{
+  width:550px;height:280px;padding:20px 0 0 0 ; box-sizing: border-box;
+}
 </style>
