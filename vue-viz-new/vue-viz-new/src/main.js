@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+
 import dataV from '@jiaminghi/data-view'
 import axios from 'axios'
 import echarts from 'echarts'
@@ -10,6 +10,7 @@ import liquidfill from "echarts-liquidfill"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from "./common/store/store"
+import router from './router'
 
 Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts

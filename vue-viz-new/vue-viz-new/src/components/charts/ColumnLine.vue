@@ -8,7 +8,7 @@
 </style>
 <template>
 <div class="o-echarts">
-  <dv-charts :option="option" />
+  <div :id="id" style="width:100%; height:100%;"></div>
 </div>
   
 </template>
@@ -18,6 +18,24 @@ export default {
   name: "ColumnLine",
   props: {
     option: Object
+  },
+  mounted() {
+    this.myChart = this.$echarts.init(document.getElementById(this.id));
+    if(this.option != undefined){
+      this.myChart.setOption(this.option);
+    }
+  },
+  watch: { 
+    option(a,b){
+      this.myChart.setOption(a);
+    }
+   },
+  data() {
+    return {
+      id:'barLine_' + new Date().getTime() + Math.floor(Math.random() * 1000),
+    }
+
+
   }
   
 };

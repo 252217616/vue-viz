@@ -20,6 +20,16 @@
               <div style="margin-top:21px;width:100%;height:555px">
                 <!-- 左-下 -->
                 <div style="box-sizing: border-box;padding:21px 41px;height:100%;width:100%">
+                  <div style="position:absolute;width:100px;margin-left:300px;height:30px;">
+                    <el-select v-model="mallYear" placeholder="选择年份" size="small">
+                      <el-option
+                        v-for="item in yearSelects"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </div>
                   <div style="height:45px;width:100%">
                     <span style="
                         font-size: 18px;
@@ -308,7 +318,6 @@
 <script>
 
 import Header from "../components/app-header/Header";
-import Capsule from "../components/charts/Capsule";
 import RingDiagram from "../components/charts/RingDiagram-Static";
 import WaterPond from "../components/charts/WaterPond";
 import EchartMap from "../components/charts/Echart-map";
@@ -318,7 +327,7 @@ import DigitalAnimation from "../components/other/DigitalAnimation";
 import api from '@/common/cockpitApi';
 export default {
   name: "HelloWorld",
-  components: {Header,Capsule,DigitalAnimation,RingDiagram,WaterPond,EchartMap,Percent,ColumnLine},
+  components: {Header,DigitalAnimation,RingDiagram,WaterPond,EchartMap,Percent,ColumnLine},
   // 生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   // 生命周期 - 载入后, Vue 实例挂载到实际的 DOM 操作完成，一般在该过程进行 Ajax 交互
@@ -336,8 +345,18 @@ export default {
       that.changeTodayUserNum ="";
       todayUserNum.classList.remove("addTodayNum");
       
-    }) 
-    // this.onload();
+    })
+    this.getAllcategory();
+    let time = this.getTime();
+    this.mallYear = time.year; 
+    this.thisYear = time.year;
+    const timer = window.setInterval(() => {
+      setTimeout(this.onload(), 0)
+    }, 10000)
+    this.$once('hook:beforeDestroy', ()=>{
+    clearInterval(timer)
+  })
+
   },
   data() {
     return {
@@ -347,43 +366,8 @@ export default {
         height: "1004px",
          
       },
-      RingDiagramOption:{
-        title: {
-           show:false,
-          },
-          series: [
-            {
-              type: 'pie',
-      
-             
-              data: [
-                { name: '可口可乐\n asd', value: 93},
-                { name: '百事可乐', value: 32 },
-                { name: '哇哈哈', value: 65 },
-                { name: '康师傅', value: 44 },
-                { name: '统一', value: 52 },
-                { name: '统一22', value: 52 },
-              ],
-              radius: ['45%', '60%'],
-              insideLabel: {
-                show: false,
-                style:{
-                  fontSize:20,
-                  fill: '#fff',
-                  textAlign: 'center',
-                  textBaseline: 'middle'
-                }
-              },
-              outsideLabel:{
-                style: {
-                  fontSize: 15,
-                },
-                labelLineBendGap:30,
-                labelLineEndLength:30
-              }
-            }
-          ]
-      },
+      oldTime:undefined,
+      RingDiagramOption:{},
       userNum: {},
       changeUserNum:"",
       todayUserNum: {},
@@ -405,7 +389,16 @@ export default {
       monthColumnLineOption:{},
       monthColumnType:0,
       monthColumnAmountData:{},
-     
+      monthColumnNumData:{},
+      monthColumnAmountData:{},
+      categoryMap :new Map(),
+      yearSelects: [{
+        value: '2020',
+        label: '2020年'
+      }],
+      mallYear:"",
+      thisYear:"",
+      oldMonth:0
     };
   },
   // 方法集合
@@ -468,66 +461,173 @@ export default {
       this.updateDayColumnLine();
 
       
+
+      
     },
-    updateRingDiagram(data){
-        api.mallCategoryRank().then(res => {
-          // 获取数据成功后的其他操作
-          let data = [];
-          let total = res.result["total"];
-          let sum = 0;
-          for(let i in res.result){
-            if(i == "total"){
-              continue;
-            }  
-            let param = {};
-            param.name =  i+"\n"+((res.result[i]/total)*100).toFixed(2)+"%";
-            param.value = res.result[i]
-            sum += res.result[i];
-            data.push(param);
-          }
-          data.push({
-            name:"其他\n"+((total-sum/total)*100).toFixed(2)+"%",
-            value:total-sum
-            })
-          console.log(data)
-          this.RingDiagramOption={
-            title: {
-              show:false,
-              },
-              series: [
-                {
-                  type: 'pie',
-                  data:data,
-                  radius: ['45%', '60%'],
-                  insideLabel: {
-                    show: false,
-                    style:{
-                      fontSize:20,
-                      fill: '#fff',
-                      textAlign: 'center',
-                      textBaseline: 'middle'
-                    }
-                  },
-                  outsideLabel:{
-                    style: {
-                      fontSize: 15,
-                    },
-                    labelLineBendGap:30,
-                    labelLineEndLength:30
-                  }
+    
+    getTime(){
+        let myDate = new Date();
+        let tYear = myDate.getFullYear();
+        let tMonth = myDate.getMonth()+1;
+        let day = myDate.getDate();
+        let m = tMonth;
+        if (m.toString().length == 1) {
+            m = "0" + m;
+        }
+        let d = day;
+        if (d.toString().length == 1) {
+            d = "0" + d;
+        }
+        return {
+          year:tYear.toString(),
+          month:tMonth.toString(),
+          rMonth:m,
+          rDat:d,
+          day: day.toString(),    
+        };
+
+    },
+    updateRingDiagram(){
+        let time = this.getTime().day;
+        if(this.oldTime == undefined || this.oldTime !=time ||this.RingDiagramOption.series == undefined){
+          this.oldTime = time;
+           api.mallCategoryRank().then(res => {
+                // 获取数据成功后的其他操作
+                let data = [];
+                let total = res.result["total"];
+                let sum = 0;
+                for(let i in res.result){
+                  if(i == "total"){
+                    continue;
+                  }  
+                  let param = {};
+                  param.name =  this.categoryMap.get(i);
+                  param.value = res.result[i]
+                  sum += res.result[i];
+                  data.push(param);
                 }
-              ]
-          }            
-      }).catch((err)=>{
-        this.$message.error("电商品类销售占比数据加载失败。")
-      })
+                if(total-sum != 0){
+                    data.push({
+                      name:"其他",
+                      value:total-sum
+                    })
+                }
+               
+                // console.log(data)
+                this.RingDiagramOption={
+                  series: [{
+                      name: '',
+                      type: 'pie',
+                      radius: ['45%', '60%'],
+                      avoidLabelOverlap: true,
+                      // silent: true,　
+                      minAngle: 20,   
+                      label: {
+                          align: 'left',
+                          margin:10,
+                          normal:{
+                              position: 'outside',
+                            
+                              formatter(v) {
+                                  let text = v.name+"\n"+ Math.round(v.percent)+'%'
+                                  
+                                  return text;
+                              },
+                              textStyle : {
+                                  fontSize : 15
+                              }
+                          }
+                      },
+                      labelLine: {    //引导线设置
+                            normal: {
+                                  show: true,   //引导线显示
+                            }
+                      },
+                      emphasis: {
+                          label: {
+                              show: true,
+                              fontSize: '20',
+                              fontWeight: 'bold'
+                          }
+                      },
+                      labelLine: {
+                          normal: {
+                              show:true,       //引导线不显示
+                          }
+                      },
+                      data: data,
+                      itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            },
+                            normal:{
+                                color:function(params) {
+                                //自定义颜色
+                                var colorList = [          
+                                        '#00D88B', '#FEAB65', '#0091F0', '#01E3EB', '#8256E7', '#E25D68',"#FFFFFF"
+                                    ];
+                                    return colorList[params.dataIndex]
+                                }
+                            }
+                      }
+                  }
+          ]
+                }            
+            }).catch((err)=>{
+              console.log(err)
+              this.$message.error("电商品类销售占比数据加载失败。")
+            })
+        }else {
+          // console.log("no")
+        }
+
+       
     },
-    updateMallTable(){
-       api.mallMonthlyStat({year:"2020"})
+    initMallTable(){
+       api.mallMonthlyStat({year:this.mallYear})
        .then(res => {
          this.tableData = res.result
        })
        .catch(err=>{
+         this.$message.error("电商年度数据加载失败。")
+       })
+    },
+    updateMallTable(){
+       let time = this.getTime();
+       api.updateByTimeStat({
+         remark:time.month,
+         startType:"20",
+         endType:"29",
+         startTime: time.year+time.rMonth+"00000000"
+       })
+       .then(res => {
+         
+         if(this.tableData.length == 0 ||this.oldMonth != time.month){
+           this.oldMonth = time.month;
+           this.initMallTable();
+           return;
+         }else{
+            let td = [];
+            let last = this.tableData[this.tableData.length-1];
+            let result = res.result;
+            if(last.remark == result.remark && last.totalCount ==result.totalCount && last.totalAmount == result.totalAmount ){
+              //无变化
+              return;
+            }else{
+              for(let i = 0 ;i<this.tableData.length-1;i++){
+                td.push(this.tableData[i]);
+              }
+              td.push(result);
+              this.tableData = td;
+            }
+             
+         }
+        
+       })
+       .catch(err=>{
+         console.log(err)
          this.$message.error("电商年度数据加载失败。")
        })
     },
@@ -581,23 +681,30 @@ export default {
     updateMallNum(){
       api.mallOrderStat()
        .then(res => {
+        //  console.log("debug")
          let result = res.result;
-         this.mallNum = result.total.totalCount;
-         let amount = result.total.totalAmount;
-         if(amount>10000){
-           amount = this.commafy((amount/10000).toFixed(2))+"w"
+         if(this.mallNumWaterPond.series == undefined || this.mallNumWaterPond.series[0].data[0].value != result.today.totalCount){
+           
+            this.mallNum = result.total.totalCount;
+            let amount = result.total.totalAmount;
+            if(amount>10000){
+              amount = this.commafy((amount/10000).toFixed(2))+"w"
+            }
+            this.mallAmount = amount;
+            let todayCount = result.today.totalCount;
+            let todayAmount = result.today.totalAmount;
+            if(todayAmount>10000){
+              todayAmount = (todayAmount/10000).toFixed(1)+"w"
+            }
+            this.mallNumWaterPond =this.changeWaterOption(todayCount);
+            this.mallAmountWaterPond =this.changeWaterOption(todayAmount); 
+         }else {
+          //  console.log("无变化")
          }
-         this.mallAmount = amount;
-         let todayCount = result.today.totalCount;
-         let todayAmount = result.today.totalAmount;
-         if(todayAmount>10000){
-           todayAmount = (todayAmount/10000).toFixed(1)+"w"
-         }
-         this.mallNumWaterPond =this.changeWaterOption(todayCount);
-         this.mallAmountWaterPond =this.changeWaterOption(todayAmount);
         
        })
        .catch(err=>{
+         console.log(err)
          this.$message.error("电商数据加载失败。")
        })
     },
@@ -605,21 +712,24 @@ export default {
       api.unicomOrderStat()
        .then(res => {
          let result = res.result;
-         this.unicomNum = result.total.totalCount;
-         let amount = result.total.totalAmount;
-         if(amount>10000){
-           amount = this.commafy((amount/10000).toFixed(2))+"w"
+         if(this.unicomNumWaterPond.series == undefined || this.unicomNumWaterPond.series[0].data[0].value != result.today.totalCount){
+           
+            this.unicomNum = result.total.totalCount;
+            let amount = result.total.totalAmount;
+            if(amount>10000){
+              amount = this.commafy((amount/10000).toFixed(2))+"w"
+            }
+            this.unicomAmount = amount;
+            let todayCount = result.today.totalCount;
+            let todayAmount = result.today.totalAmount;
+            if(todayAmount>10000){
+              todayAmount = (todayAmount/10000).toFixed(1)+"w"
+            }
+            this.unicomNumWaterPond =this.changeWaterOption(todayCount);
+            this.unicomAmountWaterPond=this.changeWaterOption(todayAmount);
+         }else {
+          //  console.log("无变化")
          }
-         this.unicomAmount = amount;
-         let todayCount = result.today.totalCount;
-         let todayAmount = result.today.totalAmount;
-         if(todayAmount>10000){
-           todayAmount = (todayAmount/10000).toFixed(1)+"w"
-         }
-         this.unicomNumWaterPond =this.changeWaterOption(todayCount);
-         this.unicomAmountWaterPond=this.changeWaterOption(todayAmount);
-         
-        
        })
        .catch(err=>{
          this.$message.error("电商数据加载失败。")
@@ -677,7 +787,7 @@ export default {
     updateUnicomDistributed(){
       api.unicomDistributed()
        .then(res => {
-          console.log(22)
+          // console.log(22)
           let result = res.result;
           let numSum = 0;
           let amountSum = 0;
@@ -722,7 +832,7 @@ export default {
 
     }
     ,
-    updateDayColumnLine(){
+    initDayColumnLine(){
         api.unicomDayStat()
        .then(res => {
           
@@ -732,7 +842,7 @@ export default {
           let result = res.result;
           result.forEach(x=>{
             xAxis.push(x.remark);
-            amountDate.push(x.totalAmount);
+            amountDate.push((x.totalAmount));
             numData.push(x.totalCount)
           })
           this.dayColumnAmountData = {
@@ -754,22 +864,54 @@ export default {
        })      
     }
     ,
-    updateMonthColumnLine(){
+    updateDayColumnLine(){
+       let time = this.getTime();
+       api.updateByTimeStat({
+         remark:time.day,
+         startType:"31",
+         endType:"32",
+         startTime: time.year+time.rMonth+time.rDay+"000000"
+       })
+       .then(res => {
+        //  console.log("debug")
+          let result = res.result;
+         
+          
+          if(this.dayColumnNumData.xLine==undefined 
+          || this.dayColumnNumData.xLine[this.dayColumnNumData.xLine.length-1] != result.remark ){
+            this.initDayColumnLine();
+            return;
+          }
+          if(this.dayColumnNumData.data[this.dayColumnNumData.data.length-1] != result.totalCount){
+            this.dayColumnNumData.data[this.dayColumnNumData.data.length-1] =  result.totalCount;
+            this.dayColumnAmountData.data[this.dayColumnAmountData.data.length-1] = result.totalAmount;
+            this.changeDayColumnLineType();
+          }else {
+            // console.log("无变化")
+          }
+       })
+       .catch(err=>{
+         console.log(err)
+         this.$message.error("联通业务分布加载失败。")
+       })      
+    }
+    ,
+    initMonthColumnLine(){
         api.unicomMonthlyStat({year:"2020"})
        .then(res => {
-          console.log(res)
+          // console.log(res)
           let xAxis = [];
           let numData = [];
           let amountDate = [];
           let result = res.result;
           result.forEach(x=>{
             xAxis.push(x.remark);
-            amountDate.push(x.totalAmount);
+            amountDate.push(Number((x.totalAmount/10000).toFixed(2)));
             numData.push(x.totalCount)
           })
           this.monthColumnAmountData = {
             data:amountDate,
-            unit:"元",
+            unit:"万元",
             xLine:xAxis
           }
           this.monthColumnNumData = {
@@ -786,214 +928,179 @@ export default {
        })  
     }
     ,
-    changeColumnOption( list ,xLine, unit){
-      return {
-              title:{
-                show:false
-              },
-              legend: {
-                data: ['时间'],
-                bottom: 10
-              },
-              xAxis: {
-                data: xLine,
-                axisLabel: {
-                  style: {
-                    rotate: 0,
-                    textAlign: 'left',
-                    textBaseline: 'top',
-                    fill:"#FFFFFF"
-                  }
-                },
-                axisTick: {
-                  show: false
-                },
-                axisLine: {
-                  show:true,
-                  style: {
-                      stroke: '#3484D0',
-                      lineWidth: 4, //这里是为了突出显示加上的  
-                  }
-                },
-
-              },
-              yAxis: [
-                {
-                  name: unit,
-                  data: 'value',
-                  min:0,
-                  nameTextStyle: {
-                    fill: '#FFFFFF',
-                    fontSize: 10
-                  },
-                  splitLine: {
-                    show:false
-                  },
-                  axisLabel: {
-                    
-                    style:{
-                      fill:"#FFFFFF"
-                    }
-                  },
-                  axisTick: {
-                    show: false
-                  },
-                  axisLine: {
-                    show:true,
-                    style: {
-                        stroke: '#3484D0',
-                        lineWidth: 1, //这里是为了突出显示加上的  
-                    }
-                  },
-
-                },
-              
-              ],
-              series: [
-                {
-                  name: unit,
-                  data:list,
-                  type: 'bar',
-                  gradient: {
-                    color: ['#37a2da', '#67e0e3']
-                  },
-                  barWidth:10,
-                  animationCurve: 'easeOutBounce',
-                  label:{
-                    show:true,
-                    style: {
-                      fontSize: 12,
-                      fill: '#FFFFFF'
-                    }
-                  },
-                  
-                },
-              ],       
+    updateMonthColumnLine(){
+       let time = this.getTime();
+       api.updateByTimeStat({
+         remark:time.month,
+         startType:"31",
+         endType:"32",
+         startTime: time.year+time.rMonth+"00000000"
+       })
+       .then(res => {
+          let result = res.result;
+          if(this.monthColumnNumData.xLine==undefined 
+          || this.monthColumnNumData.xLine[this.monthColumnNumData.xLine.length-1] != result.remark ){
+            this.initMonthColumnLine();
+            return;
           }
+          if(this.monthColumnNumData.data[this.monthColumnNumData.data.length-1] != result.totalCount){
+            this.monthColumnNumData.data[this.monthColumnNumData.data.length-1] =  result.totalCount;
+            this.monthColumnAmountData.datap[this.monthColumnAmountData.data.length-1] = result.totalAmount;
+            this.changeMonthColumnLineType();
+          }else {
+            // console.log("无变化")
+          }
+       })
+       .catch(err=>{
+         console.log(err)
+         this.$message.error("联通年度数据加载失败。")
+       })  
+    }
+    ,
+    changeColumnOption( list ,xLine, unit){
+            return  {
+        xAxis: {
+            data: xLine,
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#3484D0',//左边线的颜色
+                    width:'4'//坐标线的宽度
+                }
+            },
+            axisLabel: {
+              color:"#FFFFFF"         
+                      
+            },
+        },
+        yAxis: {
+            name:unit,
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#3484D0',//左边线的颜色
+                    width:'1'//坐标线的宽度
+                }
+            },
+            axisLabel: {
+              color:"#FFFFFF"         
+                      
+            },
+            nameTextStyle:{
+                color:"#FFFFFF"
+            },
+            splitLine:{
+                show:false
+            }
+        },
+        series: [{
+            data: list,
+            type: 'bar',
+            showBackground: false,
+            label:{
+                show:true,
+                position: 'top',
+                color:"#FFFFFF"
+            },
+            itemStyle: {
+                color: new this.$echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                        {offset: 0.2, color: '#37a2da'},
+                        {offset: 1, color: '#67e0e3 '}
+                    ]
+                ),
+            
+                
+            },
+            
+            barMaxWidth:30,
+            barMinWidth:10,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            },
+      
+        }]
+      }
+      
     }
     ,
     changeColumnLineOption( list ,xLine, unit){
-      return {
-              title:{
+      return  {
+        xAxis: {
+            data: xLine,
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#3484D0',//左边线的颜色
+                    width:'4'//坐标线的宽度
+                }
+            },
+            axisLabel: {
+              color:"#FFFFFF"         
+                      
+            },
+        },
+        yAxis: {
+            name:unit,
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#3484D0',//左边线的颜色
+                    width:'1'//坐标线的宽度
+                }
+            },
+            axisLabel: {
+              color:"#FFFFFF"         
+                      
+            },
+            nameTextStyle:{
+                color:"#FFFFFF"
+            },
+            splitLine:{
                 show:false
-              },
-              legend: {
-                data: ['时间'],
-                bottom: 10
-              },
-              xAxis: {
-                data: xLine,
-                axisLabel: {
-                  style: {
-                    rotate: 0,
-                    textAlign: 'left',
-                    textBaseline: 'top',
-                    fill:"#FFFFFF"
-                  }
-                },
-                axisTick: {
-                  show: false
-                },
-                axisLine: {
-                  show:true,
-                  style: {
-                      stroke: '#3484D0',
-                      lineWidth: 4, //这里是为了突出显示加上的  
-                  }
-                },
-
-              },
-              yAxis: [
-                {
-                  name: unit,
-                  data: 'value',
-                  min:0,
-                  nameTextStyle: {
-                    fill: '#FFFFFF',
-                    fontSize: 10
-                  },
-                  splitLine: {
-                    show:false
-                  },
-                  axisLabel: {
-                    
-                    style:{
-                      fill:"#FFFFFF"
-                    }
-                  },
-                  axisTick: {
-                    show: false
-                  },
-                  axisLine: {
-                    show:true,
-                    style: {
-                        stroke: '#3484D0',
-                        lineWidth: 1, //这里是为了突出显示加上的  
-                    }
-                  },
-
-                },
-                {
-                  name: unit,
-                  data: 'value',
-                  min:0,
-                  nameTextStyle: {
-                    fill: '#FFFFFF',
-                    fontSize: 10
-                  },
-                  splitLine: {
-                    show:false
-                  },
-                  axisLabel: {
-                    
-                    style:{
-                      fill:"#FFFFFF"
-                    }
-                  },
-                  axisTick: {
-                    show: false
-                  },
-                  axisLine: {
-                    show:true,
-                    style: {
-                        stroke: '#3484D0',
-                        lineWidth: 1, //这里是为了突出显示加上的  
-                    }
-                  },
-
-                },
-              
-              ],
-              series: [
-                {
-                  name: unit,
-                  data:list,
-                  type: 'bar',
-                  gradient: {
-                    color: ['#37a2da', '#67e0e3']
-                  },
-                  barWidth:10,
-                  animationCurve: 'easeOutBounce',
-                  label:{
-                    show:true,
-                    style: {
-                      fontSize: 12,
-                      fill: '#FFFFFF'
-                    }
-                  },
-                  
-                },
-                {
-                  name: unit,
-                  data:list,
-                  type: 'line',
-                  yAxisIndex: 1,
-                  animationCurve: 'easeOutBounce',
-                  
-                  
-                },
-              ],       
-          }
+            }
+        },
+        series: [{
+            data: list,
+            type: 'bar',
+            showBackground: false,
+            label:{
+                show:true,
+                position: 'top',
+                color:"#FFFFFF"
+            },
+            itemStyle: {
+                color: new this.$echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                        {offset: 0.2, color: '#37a2da'},
+                        {offset: 1, color: '#67e0e3 '}
+                    ]
+                ),
+            
+                
+            },
+            
+            barMaxWidth:30,
+            barMinWidth:10,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            },
+      
+        },
+        {
+            data: list,
+            type: 'line',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            },
+        }]
+      }
+      
     }
     ,
     changeMonthColumnLineType(){
@@ -1005,6 +1112,7 @@ export default {
     }
     ,
     changeDayColumnLineType(){
+      // console.log(this.dayColumnType)
       if(this.dayColumnType == 0){
          this.dayColumnLineOption= this.changeColumnLineOption( this.dayColumnNumData.data, this.dayColumnNumData.xLine, this.dayColumnNumData.unit)
       }else{
@@ -1020,6 +1128,19 @@ export default {
     
         todayUserNum.classList.add("addTodayNum");
     
+    },
+    getAllcategory(){
+      api.getAllcategory()
+      .then(res=>{
+        let result = res.result;
+        result.forEach(x=>{
+          this.categoryMap.set(x.categoryNo,x.categoryName);
+        })
+        this.onload();
+      }).catch(err=>{
+         console.log(err)
+         this.$message.error("分类数据加载失败。")
+       })  
     }
      
   },
@@ -1202,6 +1323,10 @@ export default {
     top:100px;
     opacity:0;
   }
+}
+.el-input--suffix .el-input__inner{
+  background: #01143F;
+  color: #FFFFFF;
 }
 
 </style>

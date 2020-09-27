@@ -8,13 +8,13 @@ else if (process.env.NODE_ENV == 'debug') {
     axios.defaults.baseURL = 'http://localhost:9080/console';
 } 
 else if (process.env.NODE_ENV == 'production') {    
-    axios.defaults.baseURL = 'http://localhost:9080/console';
+    axios.defaults.baseURL = 'http://console-test.fengniaotech.com/console';
 }
 
-axios.defaults.timeout = 10000 //请求超时时间
+axios.defaults.timeout = 30000 //请求超时时间
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'//设置post请求头
-axios.defaults.headers.post['X-Access-Token'] = 'f8b997704ef14590ae81e49de74cb830'//设置post请求头
+// axios.defaults.headers.post['X-Access-Token'] = 'f8b997704ef14590ae81e49de74cb830'//设置post请求头
 // axios.interceptors.request.use(    
 //     config => {        
 //         // 每次发送请求之前判断vuex中是否存在token        

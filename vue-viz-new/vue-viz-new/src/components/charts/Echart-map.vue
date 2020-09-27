@@ -227,10 +227,10 @@ export default {
                         // borderColor: '#065676',
                         // borderWidth: 1
 
-                        areaColor: '#0C2354',
+                        areaColor: '#0F2C6B',
                         borderColor: '#065676',
                         borderWidth: 1,
-                        shadowColor: 'rgba(0,0,0, 0.7)',
+                        shadowColor: 'rgba(0,0,0, 0.5)',
                         shadowBlur: 50
                        
                     },

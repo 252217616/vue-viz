@@ -28,11 +28,7 @@ export default {
   },
   watch: { 
     config(a,b){
-      if(b.series == undefined){
-        this.myChart.setOption(a);
-      }else {
-        this.myChart.setOption(b);
-      }
+     this.myChart.setOption(a);
     }
    },
   methods:{
