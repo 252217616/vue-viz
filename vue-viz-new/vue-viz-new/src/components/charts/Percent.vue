@@ -14,7 +14,6 @@
     }
     .bar{
       position:relative;
-      
       height:16px;
       background: linear-gradient(180deg, #5DAFFF 0%, #377DFF 100%);
       border-radius: 8px;top:-16px

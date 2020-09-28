@@ -1,6 +1,10 @@
-
+<style scoped>
+ .mystyle{
+   width:200px;height:50px;
+ }
+</style>
 <template>
-  <dv-digital-flop :config="config" style="width:200px;height:50px;" />
+  <dv-digital-flop :config="config" class="mystyle" />
 </template>
  
  

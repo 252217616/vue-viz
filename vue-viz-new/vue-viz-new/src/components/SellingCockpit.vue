@@ -11,16 +11,19 @@
                 -moz-background-size:100% 100%;">
             <div class="left">
               <!-- 左 -->
-              <!-- <button v-on:click="onload()">123123</button> -->
+              <!-- <button v-on:click="anp()">123123</button> -->
               <div  class="left-top" >
                  <!-- 左-上 -->
-                <div class="left-top-ring" >电商品类销售占比</div>          
-                  <RingDiagram v-bind:option="RingDiagramOption"/>
+                <div class="left-top-ring" >电商品类销售占比</div>
+                <div style="width:100%;height:90%">
+                  <RingDiagram v-bind:option="RingDiagramOption" />
+                </div>          
+                  
               </div>
               <div class= "left-down" >
                 <!-- 左-下 -->
                 <div class="left-down-div" >
-                  <div class="left-down-year" >
+                  <!-- <div class="left-down-year" >
                     <el-select v-model="mallYear" placeholder="选择年份" size="small">
                       <el-option
                         v-for="item in yearSelects"
@@ -29,13 +32,13 @@
                         :value="item.value">
                       </el-option>
                     </el-select>
-                  </div>
+                  </div> -->
                   <div class="left-down-mall-tab" >
-                    <span class="left-down-mall-tab-text" >
+                    
                         电商品类销售
-                      </span>
+                      
                   </div>
-                  <div style="height:95%;width:100%">
+                  <div style="height:90%;width:100%">
                       <el-table :data="tableData"
                         style="width: 100%;height:100%"
                         :header-cell-style="thStyleFun"
@@ -44,18 +47,18 @@
                         <el-table-column
                           prop="remark"
                           label="月份"
-                          width="140"
+                          
                           :formatter="formatMonth">
                         </el-table-column>
                         <el-table-column
                           prop="totalCount"
                           label="订单数量"
-                          width="140">
+                         >
                         </el-table-column>
                         <el-table-column
                           prop="totalAmount"
                           label="订单金额"
-                          width="140"
+                         
                           :formatter="formatAmount">
                         </el-table-column>
                       </el-table>
@@ -73,17 +76,19 @@
                          <div class="middle-top-div-usercNum" id="userNum" >{{changeUserNum}}</div>
                          <span class="middle-top-div-userctext" >累计用户数</span></div>
                        <div class="middle-top-div-userdNum" >
-                         <div style="float:right;">
-                          <DigitalAnimation v-bind:config="userNum" />
-                         </div>
+                        
+                          <DigitalAnimation v-bind:config="userNum" style="float:right;height: 100%;
+    margin-top: -10%" />
+                         
                        </div>
                        <div class="middle-top-user2" >
                           <div class="middle-top-user2-num" id="todayUserNum" >{{changeTodayUserNum}}</div>
                          <span class="middle-top-user2-text" >今日新增用户数</span></div>
                        <div class="middle-top-user2-dnum">
-                         <div style="float:right;">
-                          <DigitalAnimation v-bind:config="todayUserNum" />
-                         </div>
+                         
+                          <DigitalAnimation v-bind:config="todayUserNum" style="float:right;height: 100%;
+    margin-top: -10%"/>
+                         
                        </div>
                       </div>
                 <div class="middle-top-map" >
@@ -99,14 +104,14 @@
                     </div>
                     <div class="middle-down-div-num" >
                       <div class="middle-down-div-num1" >
-                          <span >交易数量</span>
+                          <span class="middle-down-div-num1-span" >交易数量</span>
                           <div class="middle-down-div-num2" > 
                             <span class="middle-down-div-num-text" >{{unicomNum}}</span>
                             <span class="middle-down-div-num-unit" >单</span>
                           </div>
                         </div>
                       <div  class="middle-down-div-num1" >
-                        <span >交易金额</span>
+                        <span class="middle-down-div-num1-span" >交易金额</span>
                           <div class="middle-down-div-num2"> 
                             <span class="middle-down-div-num-text" >{{unicomAmount}}</span>
                             <span class="middle-down-div-num-unit">元</span>
@@ -137,7 +142,7 @@
                     </div>
                     <div class="middle-down-div-num">
                       <div class="middle-down-div-num1">
-                          <span >交易数量</span>
+                          <span class="middle-down-div-num1-span">交易数量</span>
                           
                           <div class="middle-down-div-num2"> 
                             <span class="middle-down-div-num-text" >{{mallNum}}</span>
@@ -145,7 +150,7 @@
                           </div>
                         </div>
                       <div  class="middle-down-div-num1" >
-                        <span >交易金额</span>
+                        <span class="middle-down-div-num1-span">交易金额</span>
                           <div  class="middle-down-div-num2"> 
                             <span class="middle-down-div-num-text">{{mallAmount}}</span>
                             <span class="middle-down-div-num-unit">元</span>
@@ -176,30 +181,37 @@
               <!-- 右 -->
               <div class="right-top">
                 <!-- 右-上 -->
-                <div  class="right-top-h1">今日套餐分布</div>
-                  <br/>
-                  <div class="right-top-leabl" >
-                    <span class="right-top-leabl-1" >受理笔数</span>
-                    <span class="right-top-leabl-2">金额占比</span>
+                <div  class="right-top-h1">
+                  今日套餐分布
+                    <div style="margin-top: 2%;">
+                      <span class="right-top-leabl-1" >受理笔数</span>
+                      <span class="right-top-leabl-2">金额占比</span>
+
                     </div>
+                    
+                </div>
+                
+                  <!-- <div class="right-top-leabl" >
+                    
+                    </div> -->
                   <div class="right-top-left" >
                     <div class="right-top-left-1" >
                         <div style="width:100%;height:20%" v-for="x in unicomDistributed">
-                         <div class="barNum" style="width:100%;height:50%;">{{x.num+" 单"}}</div>
+                         <div class="barNum" style="width:100%;height:50%;padding-top: 8%;">{{x.num+" 单"}}</div>
                          <div style="width:100%;height:50%"><Percent v-bind:barStyle="x.numStyle"/></div>
                         </div>
                     </div>
                     <div class="right-top-middle" >
-                        <div class= "h18"></div>
+                        <div style="height:9%"></div>
                           <div style="width:100%;height:20%; " v-for="x in unicomDistributed"> 
                             <div class="barExplain"> 
-                              <span>{{x.remark}}</span> 
+                              {{x.remark}}
                             </div>
                           </div>
                         </div>
                     <div class="right-top-right" >
                        <div style="width:100%;height:20%" v-for="x in unicomDistributed">
-                         <div class="barNum" style="width:100%;height:50%">{{x.amount+" 元"}}</div>
+                         <div class="barNum" style="width:100%;height:50%;padding-top: 8%;">{{x.amount+" 元"}}</div>
                          <div style="width:100%;height:50%"><Percent v-bind:barStyle="x.amountStyle"/></div>
                         </div>
                     </div>
@@ -288,12 +300,12 @@ export default {
     let time = this.getTime();
     this.mallYear = time.year; 
     this.thisYear = time.year;
-    // const timer = window.setInterval(() => {
-    //   setTimeout(this.onload(), 0)
-    // }, 10000)
-    // this.$once('hook:beforeDestroy', ()=>{
-    // clearInterval(timer)
-  // })
+    const timer = window.setInterval(() => {
+      setTimeout(this.onload(), 0)
+    }, 10000)
+    this.$once('hook:beforeDestroy', ()=>{
+    clearInterval(timer)
+  })
 
   },
   data() {
@@ -515,7 +527,7 @@ export default {
                 }            
             }).catch((err)=>{
               console.log(err)
-              this.$message.error("电商品类销售占比数据加载失败。")
+              //this.$message.error("电商品类销售占比数据加载失败。")
             })
         }else {
           // console.log("no")
@@ -529,7 +541,8 @@ export default {
          this.tableData = res.result
        })
        .catch(err=>{
-         this.$message.error("电商年度数据加载失败。")
+         console.log(err)
+         //this.$message.error("电商年度数据加载失败。")
        })
     },
     updateMallTable(){
@@ -566,7 +579,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("电商年度数据加载失败。")
+         //this.$message.error("电商年度数据加载失败。")
        })
     },
     updateUserNumber(){
@@ -613,7 +626,7 @@ export default {
        })
        .catch(err=>{
          console.log(err);
-         this.$message.error("用户数据加载失败。")
+         //this.$message.error("用户数据加载失败。")
        })
     },
     updateMallNum(){
@@ -643,7 +656,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("电商数据加载失败。")
+         //this.$message.error("电商数据加载失败。")
        })
     },
     updateUnicomNum(){
@@ -670,7 +683,8 @@ export default {
          }
        })
        .catch(err=>{
-         this.$message.error("电商数据加载失败。")
+         console.log(err)
+         //this.$message.error("电商数据加载失败。")
        })
     },
     changeWaterOption(number){
@@ -765,7 +779,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("联通天数据加载失败。")
+         //this.$message.error("联通天数据加载失败。")
        })
 
     }
@@ -798,7 +812,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("联通业务分布加载失败。")
+         //this.$message.error("联通业务分布加载失败。")
        })      
     }
     ,
@@ -830,7 +844,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("联通业务分布加载失败。")
+         //this.$message.error("联通业务分布加载失败。")
        })      
     }
     ,
@@ -862,7 +876,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("联通年度数据加载失败。")
+         //this.$message.error("联通年度数据加载失败。")
        })  
     }
     ,
@@ -891,7 +905,7 @@ export default {
        })
        .catch(err=>{
          console.log(err)
-         this.$message.error("联通年度数据加载失败。")
+         //this.$message.error("联通年度数据加载失败。")
        })  
     }
     ,
@@ -1077,7 +1091,7 @@ export default {
         this.onload();
       }).catch(err=>{
          console.log(err)
-         this.$message.error("分类数据加载失败。")
+         //this.$message.error("分类数据加载失败。")
        })  
     }
      
@@ -1170,22 +1184,19 @@ export default {
 }
 .barExplain{
   width:80%;
-  height:50%;
+
   // margin-top:5px;
-  margin-left:15px;
+  margin-left:10%;
   background: rgba(10, 31, 77, 0.62);
-  border-radius: 13px;
+  border-radius: 130px;
   border: 1px solid rgba(7, 150, 198, 0.28);
   text-align:center;
-    span{
-      display:inline-block;
-      margin-top:2px;
-      font-size: 12px;
-      font-family: PingFangSC-Medium, PingFang SC;
-      font-weight: 500;
-      color:  #FFFFFF;
-      line-height: 17px;
-    }
+  font-size: 12px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color:  #FFFFFF;
+  padding: 1% 0;
+    
 }
 .barNum{
   font-size: 12px;
@@ -1233,34 +1244,36 @@ export default {
   margin-left: 10px;
 }
 .addNum{
-  width:50px;
-  height:50px;
+  width:5%;
+  height:5%;
   position:relative;
   -webkit-animation:mymove 1s ; /*Safari and Chrome*/
+  background: red;
 }
 .addTodayNum{
-  width:50px;
-  height:50px;
+  width:5%;
+  height:5%;
   position:relative;
   -webkit-animation:todaymove 1s ; /*Safari and Chrome*/
+  background: blue;
 }
 @keyframes mymove
 {
   from {
-    top:50px;
+    top:15%;
   }
   to {
-    top:0px;
+    top:6%;
     opacity:0;
   }
 }
 @keyframes todaymove
 {
   from {
-    top:150px;
+    top:23%;
   }
   to {
-    top:100px;
+    top:16%;
     opacity:0;
   }
 }
@@ -1271,21 +1284,21 @@ export default {
 
 .left{
   float:left;
-  margin-left:23px;
-  width:521.26px;
+  margin-left:1.3%;
+  width:27%;
   height:100%
 }
 .left-top{
-  margin-top:37px;
+  margin-top:7%;
   width:100%;
-  height:345px
+  height:35%
 }
 .left-top-ring{
   box-sizing: border-box;
-  padding-top:10px;
-  margin-left:22px;
-  width: 144px;
-  height: 25px;
+  padding-top: 20px;
+  margin-left:40px;
+  width:100%;
+  height: 10%;
   font-size: 18px;
   font-family: AppleSystemUIFont;
   color: #BCEDFF;
@@ -1295,7 +1308,7 @@ export default {
 .left-down{
   margin-top:21px;
   width:100%;
-  height:555px
+  height:53%
 }
 .left-down-div{
   box-sizing: border-box;
@@ -1305,13 +1318,20 @@ export default {
 }
 .left-down-year{
   position:absolute;
-  width:100px;
-  margin-left:300px;
+  width:120px;
+  margin-left:18%;
+  margin-top: -40px;
   height:30px;
 }
 .left-down-mall-tab{
-  height:45px;
-  width:100%
+  height:10%;
+  width:100%;
+  box-sizing: border-box;
+  font-size: 0.18rem;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #BCEDFF;
+    line-height: 0.25rem;
 }
 .left-down-mall-tab-text{
   font-size: 18px;
@@ -1322,14 +1342,14 @@ export default {
 }
 .middle{
   float:left;
-  margin-top:37px;
-  margin-left:21px;
-  width:773px;
+  margin-top: 2%;
+  margin-left: 1.3%;
+  width:40%;
   height:100%
 }
 .middle-top{
   width:100%;
-  height:630px;
+  height:65%;
 }
 .middle-top-div{
   width: 438px;
@@ -1337,7 +1357,8 @@ export default {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.02) 100%);
   border: 1px solid;
   border-image: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.04)) 1 1;
-  position:absolute;margin-left:335px;
+
+  float: right
 }
 .middle-top-user1{
   float:right;
@@ -1346,15 +1367,16 @@ export default {
   margin-right:24px;  
 }
 .middle-top-div-usercNum{
-  width:100px;
-  height:50px;
-  position:absolute; 
-  margin-top:10px;
-  margin-left:80px;                         
-  font-size: 40px;
+  width: 5%;
+  height: 4%;
+  position: absolute;
+  margin-top: 0.1rem;
+  margin-left: 4%;
+  font-size: 0.4rem;
   font-family: Impact;
   color: #51AEFF;
-  line-height: 68px;
+  line-height: 0.68rem;
+
 }
 .middle-top-div-userctext{
   color:white;
@@ -1378,11 +1400,11 @@ export default {
   margin-right:24px;
 }
 .middle-top-user2-num{
-  width:100px;
-  height:50px;
-  position:absolute;
-  margin-top:20px;
-  margin-left:450px;                                                 
+  width: 5%;
+  height: 3%;
+  position: absolute;
+  margin-top: 0.2rem;
+  margin-left: 13%;                                                
   font-size: 30px;
   font-family: Impact;
   color: #FF9235;
@@ -1404,8 +1426,8 @@ export default {
 .middle-top-map{
   margin-top:70px;
   margin-left:70px;
-  width:525.4px;
-  height:541px;
+  width:30%;
+  height:50%;
   position:absolute;
 }
 .middle-down{
@@ -1414,10 +1436,10 @@ export default {
   display:inline;
 }
 .middle-down-div{
-  margin-top:20px;
+  margin-top:1%;
   float:left;
-  height:271px;
-  width:375px
+  height: 23%;
+  width: 49%;
 }
 .middle-down-div-1{
   box-sizing: border-box;
@@ -1426,8 +1448,8 @@ export default {
   width:100%
 }
 .middle-down-div-2{
-  margin-top:10px;
-  height:20px;
+  margin-top:2%;
+  height:10%;
     span{
       color:#BCEDFF;
       font-size: 13px;
@@ -1437,37 +1459,40 @@ export default {
 }
 .middle-down-div-num{
   width:100%;
-  height:90px;
+  height:30%;
 }
 .middle-down-div-num1{
-  margin-top:20px;
-  margin-left:5px;
-  float:left;
-  width:150px;
-  height:70px;
+  margin-top: 1%;
+  margin-left: 6.5%;
+  float: left;
+  width: 40%;
+  height: 85%;
   background: #002A61;
   border: 1px solid #004878;
-    span{
-      color:#BCEDFF;
-      font-size: 12px;
-      font-family: AppleSystemUIFont;
-      float:left;
-      margin-top:13px;
-      margin-left:17px
-    }
+    
+}
+.middle-down-div-num1-span{
+
+    color:#BCEDFF;
+    font-size: 12px;
+    font-family: AppleSystemUIFont;
+    float:left;
+    margin-top: 1%;
+    margin-left: 3%;
+    
 }
 .middle-down-div-num2{
-  width:150px;
-  height:30px;
-  margin-top:30px
+    width: 100%;
+    height: 70%;
+    margin-top: 20%;
 }
 .middle-down-div-num-text{
   color:#FF9235;
   font-size: 18px;
   font-family: Impact;
   float:left;
-  margin-top:13px;
-  margin-left:17px
+  margin-top: 10%;
+  margin-left: 5%;
 }
 .middle-down-div-num-unit{
   color:#BCEDFF;
@@ -1479,67 +1504,72 @@ export default {
 }
 .middle-down-div-3{
   position:absolute;
-  margin-top:70px;
+  margin-top: 3.5%;
   z-index: 10;
-  margin-left:55px;
+  margin-left: 3.7%;
   font-size: 12px;
   font-family: AppleSystemUIFont;
   color: #BCEDFF;
 }
 .middle-down-div-3-water{
-  margin-top:5px;
-  margin-left:5px;
+  
+  margin-left:8%;
   float:left;
-  width:150px;
-  height:100px
+  width:40%;
+  height:85%
 }
 .middle-down-div-4{
   position:absolute;
-  margin-top:70px;
+  margin-top:3.5%;
   z-index: 10;
-  margin-left:235px;
+  margin-left:11.7%;
   font-size: 12px;
   font-family: AppleSystemUIFont;
   color: #BCEDFF;
 }
 .middle-down-div-4-water{
-  margin-top:5px;
-  margin-left:30px;
+  
+  margin-left:5%;
   float:left;
-  width:150px;
-  height:100px
+  width:40%;
+  height:85%
 }
 .middle-down-div2{
-  margin-top:20px;
-  margin-left:21px;
-  float:left;
-  height:271px;
-  width:375px
+
+  margin-left:2%;
+  margin-top: 1%;
+  float: left;
+  height: 23%;
+  width: 49%;
 }
 .right{
   float:left;
-  margin-left:21px;
-  width:537.12px;
+  margin-left:1.3%;
+  width:28%;
   height:100%
 }
 .right-top{
-  margin-top:37px;
-  width:100%;
-  height:320px;
-  box-sizing: border-box;
-  padding:0 20px;
+margin-top: 7%;
+width: 100%;
+height: 32%;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding: 0 3%;
 }
 .right-top-h1{
-  float:left;
-  margin-top:10px;
+
+  margin-top:10%;
   font-size: 13px;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #BCEDFF;
   line-height: 18px;
+  width: 100%;
+  height: 10%;
+
 } 
 .right-top-leabl{
-  height:20px;
+  height:10%;
   width:100%;
   margin-top:20px
 }
@@ -1564,21 +1594,22 @@ export default {
   display:flex;
   width:100%;
   padding:0;
+  height: 85%;
   float:left;
 }
 .right-top-left-1{
   box-sizing: content-box;
-  padding:5px;
-  float:left;
-  width:170px;
-  height:250px
+  padding: 1%;
+  float: left;
+  width: 30%;
+  height: 95%;
 }
 .right-top-middle{
   box-sizing: content-box;
-  padding:5px;
+  padding: 1%;
   float:left;
-  width:170px;
-  height:250px;
+  width: 30%;
+  height: 95%;
   background: linear-gradient(180deg, rgba(79, 237, 249, 0) 0%, rgba(79, 237, 249, 0.2) 54%, rgba(39, 214, 240, 0) 100%);
                         
 }
@@ -1587,13 +1618,18 @@ export default {
 }
 .right-top-right{
   box-sizing: content-box;
-  padding:5px;
+  padding: 1%;
   float:left;
-  width:170px;
-  height:250px
+  width: 30%;
+  height: 95%;
 }
 .right-middle{
-  margin-top:24px;width:100%;height:281px;box-sizing: border-box;padding:0 20px;
+    margin-top: 5%;
+    width: 100%;
+    height: 28%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 3%;
 }
 .right-middle-text{
   float:left;
@@ -1606,24 +1642,38 @@ export default {
 }
 .right-middle-text-1{
   position:absolute;
-  width:420px;
-  height:165px;
-  margin-left:65px;
-  margin-top:80px;
+  width: 20.6%;
+  height: 18.5%;
+  margin-left: 3%;
+  margin-top: 2.4%;
   background: linear-gradient(180deg, rgba(89, 153, 255, 0) 0%, rgba(93, 220, 229, 0.28) 100%);
   opacity: 0.58;
 }
 .right-middle-text-2{
-  position:absolute;z-index:10;margin-left:370px
+
+  position: absolute;
+  z-index: 10;
+  margin-left: 20%;
+  margin-top: -3%;
+  width: 100%;
 }
 .mt10{
   margin-top: 10px
 }
 .right-middle-cLine{
-  width:550px;height:300px;padding:20px 0 0 0 ; box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 3% 0 0 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .right-down{
-  margin-top:22.5px;width:100%;height:271px;box-sizing: border-box;padding:0 20px;
+  margin-top: 5%;
+  width: 100%;
+  height: 25%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 3%;
 }
 .right-down-text{
   float:left;
@@ -1635,6 +1685,10 @@ export default {
   line-height: 18px;
 }
 .right-down-cLine{
-  width:550px;height:280px;padding:20px 0 0 0 ; box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 3% 0 0 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 </style>

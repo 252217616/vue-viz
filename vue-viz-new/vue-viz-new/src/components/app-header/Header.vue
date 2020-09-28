@@ -9,8 +9,8 @@
       <span class="title" >{{title}}</span>
       <!-- <dv-decoration-5 style="width:700px;height:40px;" /> -->
     </div>
-    <div class="header-right">
-      <div class="time" >{{date}}</div>
+    <div class="time" >
+      <span>{{date}}</span>
       <!-- <dv-decoration-8 :reverse="true" style="width:300px;height:50px;" /> -->
     </div>
   
@@ -47,8 +47,17 @@ export default {
 };
 </script>
 <style >
+.header-left{
+  width:320px
+}
 .header-title{
-  margin-top:8px
+  height: 100%;
+  width:100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  
 }
 .header-wrap {
   width: 100%;
@@ -66,17 +75,19 @@ export default {
   color: #BAECFF;
   line-height: 53px;
   letter-spacing: 9px;
-  margin-left:260px
+
 }
 .time{
-  width: 220px;
-  height: 26px;
+  width: 320px;
+  height: 100%;
   font-size: 20px;
   font-family: MicrosoftYaHei;
   color: #BCEDFF;
   line-height: 26px;
-  margin-top:25px;
-  margin-right: 23px;
-
+   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  
 }
 </style>
