@@ -43,6 +43,7 @@
                         style="width: 100%;height:100%"
                         :header-cell-style="thStyleFun"
                         :cell-style="cellStyleFun"
+                        
                         >
                         <el-table-column
                           prop="remark"
@@ -239,7 +240,7 @@
               <div class="right-down" >
                 <!-- 右-下 -->
                 <div class="right-down-text" >整体业务受理分布</div>
-                  <div class="ight-middle-text-1" ></div>
+                  <div class="right-middle-text-1" style="height:15%"></div>
                   <div class="right-middle-text-2">
                     <div class="mt10">
                       <el-radio-group v-model="monthColumnType" size="small" @change="changeMonthColumnLineType">
@@ -395,7 +396,7 @@ export default {
       return num;
     },
     thStyleFun() {
-      return 'text-align:center'
+      return 'text-align:center;'
     },
     cellStyleFun() {
       return 'text-align:center'
@@ -1174,7 +1175,8 @@ export default {
   .el-table__body td {
     padding: 7px;
     height: 15px;
-    //  border: 0.0001px solid  #3484D0; 
+    border: 0.1px solid  ; 
+    border-image: linear-gradient( rgba(255, 255, 255, 0.1)) 1 ;
 }
  
 // 鼠标悬浮
